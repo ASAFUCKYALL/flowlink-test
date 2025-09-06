@@ -1,0 +1,3 @@
+Contact: https://flowlink-test.pages.dev/#rdv
+Policy: https://flowlink-test.pages.dev/mentions-legales.html
+Preferred-Languages: fr, en
