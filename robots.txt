@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://flowlink-test.pages.dev/sitemap.xml
