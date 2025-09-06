@@ -1,0 +1,53 @@
+
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>FlowLink — Site Test</title>
+</head>
+<body>
+  <h1>Site FlowLink</h1>
+  <p>Bienvenue sur le site FlowLink en test.</p>
+
+  <form id="contactForm" onsubmit="return sendEmail(event)">
+    <input name="name" placeholder="Nom" required><br>
+    <input name="email" placeholder="Email" type="email" required><br>
+    <textarea name="message" placeholder="Message" required></textarea><br>
+    <button type="submit">Envoyer</button>
+    <span id="formStatus"></span>
+  </form>
+
+  <script>
+    const EMAILJS_PUBLIC_KEY = "3uZ0hPPbsvVJUg9uz";
+    const EMAILJS_SERVICE_ID = "service_flowlink";
+    const EMAILJS_TEMPLATE_ID = "template_demandedevis";
+
+    function sendEmail(e) {{
+      e.preventDefault();
+      const form = e.target;
+      const status = document.getElementById('formStatus');
+      status.textContent = 'Envoi...';
+
+      import('https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js')
+        .then(() => {{
+          // eslint-disable-next-line no-undef
+          emailjs.init(EMAILJS_PUBLIC_KEY);
+          // eslint-disable-next-line no-undef
+          return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {{
+            from_name: form.name.value,
+            reply_to: form.email.value,
+            message: form.message.value
+          }});
+        }})
+        .then(() => {{
+          status.textContent = 'Message envoyé ✔️';
+          form.reset();
+        }})
+        .catch(() => {{
+          status.textContent = 'Erreur, réessayez.';
+        }});
+      return false;
+    }}
+  </script>
+</body>
+</html>
